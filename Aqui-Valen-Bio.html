@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aqui Valen</title>
+
+  <style>
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    :root{
+      --bg:#020617;--panel:rgba(2,6,23,.72);--border:#1f2937;--txt:#fff;--muted:rgba(255,255,255,.7)
+    }
+    body{
+      margin:0;min-height:100vh;color:var(--txt);
+      background:
+        radial-gradient(900px 420px at 12% -8%,#1f2937 0%,transparent 60%),
+        radial-gradient(700px 360px at 90% 10%,#111827 0%,transparent 55%),
+        var(--bg);
+      display:flex;justify-content:center;align-items:flex-start;padding:96px 20px
+    }
+    .wrap{width:100%;max-width:760px}
+
+    header{display:flex;gap:28px;align-items:center;margin-bottom:44px}
+    .avatar{
+      width:112px;height:112px;border-radius:50%;
+      background:linear-gradient(135deg,#22d3ee,#6366f1);
+      display:grid;place-items:center;
+      box-shadow:0 20px 40px rgba(0,0,0,.45);
+      overflow:hidden
+    }
+    .avatar img{
+      width:100%;height:100%;object-fit:cover
+    }
+    h1{margin:0;font-size:40px;letter-spacing:.2px}
+    .tag{opacity:.75;margin-top:8px;font-size:15px}
+
+    .links{display:grid;gap:16px}
+    .link{
+      position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:space-between;
+      text-decoration:none;color:var(--txt);
+      padding:22px 26px;border-radius:18px;
+      border:1px solid var(--border);
+      background:var(--panel);backdrop-filter:blur(10px);
+      transition:transform .18s ease,box-shadow .18s ease,background .18s ease
+    }
+    .link::after{
+      content:"";position:absolute;inset:auto -40% -120% -40%;height:140%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,.12),transparent);
+      transform:translateX(-60%);transition:transform .6s ease
+    }
+    .link:hover::after{transform:translateX(60%)}
+    .link:hover{
+      transform:translateY(-3px);
+      box-shadow:0 24px 48px rgba(0,0,0,.45);
+      background:rgba(15,23,42,.9)
+    }
+    .link span:first-child{font-size:18px;font-weight:650}
+    .link span:last-child{font-size:14px;color:var(--muted)}
+
+    .yt{background:linear-gradient(135deg,#ef4444,#b91c1c);border:none}
+    .yt:hover{background:linear-gradient(135deg,#f87171,#dc2626)}
+
+    footer{margin-top:44px;opacity:.5;text-align:center;font-size:13px}
+
+    @media(max-width:700px){
+      header{flex-direction:column;align-items:flex-start;margin-bottom:36px}
+      .avatar{width:96px;height:96px}
+      h1{font-size:32px}
+    }
+	.topbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(2,6,23,.75);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.topbar-inner{
+  max-width: 760px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+.menu{
+  display: flex;
+  gap: 18px;
+}
+
+.menu a{
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: .75;
+  transition: opacity .15s ease;
+}
+
+.menu a:hover{
+  opacity: 1;
+}
+
+  </style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar-inner">
+    <strong class="logo">Aqui Valen</strong>
+
+    <div class="menu">
+      <a href="Aqui-Valen-Bio.html">Inicio</a>
+      <a href="Quien soy.html">Quién soy</a>
+      <a href="cafecito.html">Apoyar</a>
+    </div>
+  </div>
+</nav>
+
+  <main class="wrap">
+    <header>
+      <div class="avatar"><img src="logo.png" alt="Avatar Aqui Valen"></div>
+      <div>
+        <h1>Aqui Valen</h1>
+        <div class="tag">Creador de contenido • Juegos • Videos</div>
+      </div>
+    </header>
+
+    <!-- LINKS PRINCIPALES -->
+
+    <section class="links">
+      <a class="link" href="Quien soy.html"><span>👤 Quién soy</span><span>Sobre mí</span></a>
+      <a class="link" href="cafecito.html"><span>🍦 Invitame un heladito</span><span>Apoyar</span></a>
+      <a class="link yt" href="https://www.youtube.com/@aquivalen" target="_blank"><span>▶️ YouTube</span><span>Suscribite</span></a>
+    </section>
+
+    <!-- QUIÉN SOY -->
+    <!-- CAFECITO / COLABORAR -->
+    
+
+    <section id="newsletter" style="margin-top:56px">
+      <h2 style="margin:0 0 10px;font-size:26px">📩 Dejame tu mail</h2>
+      <p style="margin:0 0 18px;opacity:.75">Unite a la comunidad para enterarte de todo.</p>
+      <form style="display:grid;gap:14px;max-width:520px">
+        <input type="text" placeholder="Nombre" style="padding:14px 16px;border-radius:10px;border:1px solid #1f2937;background:#020617;color:white" />
+        <input type="email" placeholder="Email" style="padding:14px 16px;border-radius:10px;border:1px solid #1f2937;background:#020617;color:white" />
+        <button type="submit" style="padding:14px;border-radius:10px;border:none;background:#2563eb;color:white;font-weight:600;cursor:pointer">Suscribirme</button>
+      </form>
+    </section>
+
+    <footer>© 2026 Aqui Valen</footer>
+  </main>
+</body>
+</html>
+
+
+
+
+

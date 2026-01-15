@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini FNF</title>
+  <style>
+    body { margin: 0; background: black; overflow: hidden; color: white; font-family: sans-serif; }
+    #game { width: 400px; height: 600px; margin: auto; position: relative; background: #222; }
+    .arrow {
+      width: 50px; height: 50px;
+      position: absolute;
+      background-size: cover;
+    }
+    .arrow.up    { background-image: url('https://i.imgur.com/WQYtRkz.png'); }
+    .arrow.down  { background-image: url('https://i.imgur.com/BttGNaS.png'); }
+    .arrow.left  { background-image: url('https://i.imgur.com/x1pTZ5I.png'); }
+    .arrow.right { background-image: url('https://i.imgur.com/vgfhL7X.png'); }
+    #score { position: absolute; top: 10px; left: 10px; }
+  </style>
+</head>
+<body>
+  <div id="game">
+    <div id="score">Puntos: 0</div>
+  </div>
+
+  <script>
+    const game = document.getElementById("game");
+    const arrows = ["up", "down", "left", "right"];
+    let score = 0;
+
+    function spawnArrow() {
+      const dir = arrows[Math.floor(Math.random() * arrows.length)];
+      const arrow = document.createElement("div");
+      arrow.className = "arrow " + dir;
+      arrow.style.left = (arrows.indexOf(dir) * 100 + 25) + "px";
+      arrow.style.top = "0px";
+      arrow.dataset.direction = dir;
+      game.appendChild(arrow);
+    }
+
+    function update() {
+      const all = document.querySelectorAll(".arrow");
+      all.forEach(arrow => {
+        arrow.style.top = (parseInt(arrow.style.top) + 3) + "px";
+        if (parseInt(arrow.style.top) > 600) arrow.remove();
+      });
+    }
+
+    setInterval(spawnArrow, 1000);
+    setInterval(update, 20);
+
+    document.addEventListener("keydown", e => {
+      const dir = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" }[e.key];
+      if (dir) {
+        const arrowsOnScreen = document.querySelectorAll(".arrow." + dir);
+        for (let arrow of arrowsOnScreen) {
+          const top = parseInt(arrow.style.top);
+          if (top > 500 && top < 580) {
+            score += 10;
+            arrow.remove();
+            document.getElementById("score").innerText = "Puntos: " + score;
+            return;
+          }
+        }
+        score -= 5;
+        document.getElementById("score").innerText = "Puntos: " + score;
+      }
+    });
+  </script>
+</body>
+</html>

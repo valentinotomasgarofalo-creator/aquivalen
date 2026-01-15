@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>aqui valen web</title>
+    <style>
+	body.oscuro {
+    background-color: #111;
+    color: white;
+}
+
+#jugador {
+    width: 50px;
+    height: 50px;
+    background: red;
+    position: relative;
+    left: 0;
+}
+
+	
+    @keyframes rebote {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-150px); }
+        100% { transform: translateY(0px); }
+    }
+
+    img.rebote {
+        animation: rebote 1s infinite;
+    }
+	
+	    /* Fondo */
+        body {
+            background-color: lightblue;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Animación de rebote */
+        @keyframes rebote {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-150px); }
+            100% { transform: translateY(0px); }
+        }
+
+        img.rebote {
+            animation: rebote 1s infinite;
+            width: 200px;
+        }
+
+        /* Botón */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: orange;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: red;
+            color: white;
+        }
+body {
+    cursor: url("\rocket.webp") 16 16, auto;
+}
+
+body {
+    background: black;
+    color: white;
+    html, body {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+	  
+
+#mapa {
+    width: 2000px;
+    height: 2000px;
+    background: linear-gradient(green, lightgreen);
+    border: 5px solid black;
+}
+
+
+}
+
+.estrellas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("star.png");
+    animation: mover 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes mover {
+    from { background-position: 0 0; }
+    to { background-position: 0 1000px; }
+}
+
+
+});
+
+<script>
+
+function guardarNombre() {
+    let nombre = document.getElementById("nombre").value;
+    localStorage.setItem("nombreJugador", nombre);
+    mostrarNombre();
+}
+
+function mostrarNombre() {
+    let nombre = localStorage.getItem("nombreJugador");
+    if (nombre) {
+        document.getElementById("saludo").innerHTML = "👋 Hola " + nombre;
+    }
+}
+
+mostrarNombre();
+
+let record = localStorage.getItem("record") || 0;
+document.getElementById("record").innerHTML = record;
+
+function sumarPunto() {
+    record++;
+    localStorage.setItem("record", record);
+    document.getElementById("record").innerHTML = record;
+}
+let x = 0;
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") x += 10;
+    if (e.key === "ArrowLeft") x -= 10;
+    document.getElementById("jugador").style.left = x + "px";
+});
+document.addEventListener("click", function() {
+    document.getElementById("click").play();
+});
+<script>
+document.addEventListener("mousemove", function(e) {
+    let x = e.clientX;
+    let y = e.clientY;
+    document.body.style.setProperty("--x", x + "px");
+    document.body.style.setProperty("--y", y + "px");
+});
+
+</script>
+
+#seguidor {
+    position: fixed;
+    font-size: 40px;
+    pointer-events: none; /* para que no moleste */
+    transition: transform 0.1s linear;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    
+}
+body {
+    background: radial-gradient(circle at var(--x) var(--y), lightblue, blue);
+}
+
+    </style>
+
+</head>
+
+
+
+
+
+
+<html>
+<head>
+
+</head>
+
+
+
+<script>
+let usuarios = ["Player123", "GamerXD", "Noob😅", "ProMaster", "Valen🔥"];
+let mensajes = [
+    "hola",
+    "alguien juega?",
+    "jaja 😂",
+    "re pro esto",
+    "vamos a jugar",
+    "suscribanse"
+];
+
+function enviarMensaje() {
+    let chat = document.getElementById("chat");
+
+    let usuario = usuarios[Math.floor(Math.random() * usuarios.length)];
+    let mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
+
+    chat.innerHTML += "<p><b>" + usuario + ":</b> " + mensaje + "</p>";
+
+
+
+
+<script>
+<script>
+/* ========= DATOS ========= */
+let miNombre = "Valen";
+let monedas = Number(localStorage.getItem("monedas")) || 0;
+let miRango = localStorage.getItem("rango") || "NORMAL";
+
+/* ========= MOSTRAR ========= */
+function mostrarMonedas() {
+    document.getElementById("monedasTexto").innerHTML =
+        "Monedas: " + monedas;
+}
+
+function mostrarRango() {
+    document.getElementById("estado").innerHTML =
+        "Rango: " + miRango;
+}
+
+mostrarMonedas();
+mostrarRango();
+
+/* ========= MONEDAS ========= */
+function ganarMonedas() {
+    monedas += 10;
+    localStorage.setItem("monedas", monedas);
+    mostrarMonedas();
+}
+
+/* ========= TIENDA ========= */
+function comprarVIP() {
+    if (monedas >= 50) {
+        monedas -= 50;
+        miRango = "VIP";
+        guardar();
+        alert("🎉 Compraste VIP");
+    } else {
+        alert("❌ No tenés monedas");
+    }
+}
+
+function comprarADMIN() {
+    if (monedas >= 100) {
+        monedas -= 100;
+        miRango = "ADMIN";
+        guardar();
+        alert("👑 Compraste ADMIN");
+    } else {
+        alert("❌ No tenés monedas");
+    }
+}
+
+function guardar() {
+    localStorage.setItem("monedas", monedas);
+    localStorage.setItem("rango", miRango);
+    mostrarMonedas();
+    mostrarRango();
+}
+
+/* ========= CHAT ========= */
+function enviar() {
+    let chat = document.getElementById("chat");
+    let texto = document.getElementById("mensajeInput").value;
+    if (texto === "") return;
+
+    let color = "black";
+    let tag = "";
+    let borrar = "";
+
+    if (miRango === "VIP") {
+        color = "gold";
+        tag = "[VIP] ";
+    }
+
+    if (miRango === "ADMIN") {
+        color = "red";
+        tag = "[ADMIN] ";
+        borrar = "<button onclick='this.parentElement.remove()'>❌</button>";
+    }
+
+    chat.innerHTML += `
+    <div>
+        <b style="color:${color}">${tag}${miNombre}:</b>
+        ${texto} ${borrar}
+    </div>
+    `;
+
+    document.getElementById("mensajeInput").value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+
+/* ===== MISION DIARIA ===== */
+let hoy = new Date().toDateString();
+let ultimoDia = localStorage.getItem("ultimoDiaMision");
+
+function mostrarMision() {
+    if (ultimoDia === hoy) {
+        document.getElementById("misionTexto").innerHTML =
+            "✅ Misión completada. Volvé mañana";
+    } else {
+        document.getElementById("misionTexto").innerHTML =
+            "💬 Misión: Mandar 3 mensajes en el chat (+30 monedas)";
+    }
+}
+
+let mensajesHoy = 0;
+mostrarMision();
+
+function hacerMision() {
+    if (ultimoDia === hoy) {
+        alert("❌ Ya hiciste la misión hoy");
+        return;
+    }
+
+    if (mensajesHoy >= 3) {
+        monedas += 30;
+        localStorage.setItem("monedas", monedas);
+        localStorage.setItem("ultimoDiaMision", hoy);
+        ultimoDia = hoy;
+
+        alert("🎉 Misión completada +30 monedas");
+        mostrarMonedas();
+        mostrarMision();
+    } else {
+        alert("⚠️ Mandá 3 mensajes primero");
+    }
+}
+/* ===== MISION DIARIA ===== */
+let hoy = new Date().toDateString();
+let ultimoDia = localStorage.getItem("ultimoDiaMision");
+let mensajesHoy = 0;
+
+function mostrarMision() {
+    let texto = document.getElementById("misionTexto");
+    if (!texto) {
+        alert("❌ No encuentra misionTexto");
+        return;
+    }
+
+    if (ultimoDia === hoy) {
+        texto.innerHTML = "✅ Misión completada. Volvé mañana";
+    } else {
+        texto.innerHTML = "💬 Misión: Mandar 3 mensajes (+30 monedas)";
+    }
+}
+
+mostrarMision();
+
+function hacerMision() {
+    if (ultimoDia === hoy) {
+        alert("❌ Ya hiciste la misión hoy");
+        return;
+    }
+
+    if (mensajesHoy >= 3) {
+        monedas += 30;
+        localStorage.setItem("monedas", monedas);
+        localStorage.setItem("ultimoDiaMision", hoy);
+        ultimoDia = hoy;
+
+        alert("🎉 Misión completada +30 monedas");
+        mostrarMonedas();
+        mostrarMision();
+    } else {
+        alert("⚠️ Mandá 3 mensajes primero");
+    }
+}
+
+
+</script>
+
+</head>
+
+<body>
+<h2>🎯 Misiones Diarias</h2>
+
+<p id="misionTexto"></p>
+<button onclick="hacerMision()">Completar misión</button>
+
+
+
+<hr>
+
+<h2>🛒 Tienda de Pases</h2>
+<button onclick="comprarVIP()">VIP (50 monedas)</button>
+<button onclick="comprarADMIN()">ADMIN (100 monedas)</button>
+<p id="estado"></p>
+
+<hr>
+<h2>💬 Chat</h2>
+
+<div id="chat" style="
+border:2px solid black;
+width:300px;
+height:200px;
+overflow:auto;
+background:BLUE;
+padding:5px;
+margin:auto;
+text-align:left;
+"></div>
+
+<br>
+
+<input id="mensajeInput" placeholder="Escribí un mensaje">
+<button onclick="enviar(mensajesHoy++;
+)">Enviar</button><script>
+function enviar() {
+    let chat = document.getElementById("chat");
+    let input = document.getElementById("mensajeInput");
+    let texto = input.value;
+    if (texto === "") return;
+
+    /* ===== COMANDOS ===== */
+    if (texto === "/clear") {
+        if (miRango === "ADMIN") {
+            chat.innerHTML = "";
+            alert("🧹 Chat borrado");
+        } else {
+            alert("❌ Solo ADMIN");
+        }
+        input.value = "";
+        return;
+    }
+
+    if (texto === "/vip") {
+        chat.innerHTML += `<p>⭐ Tu rango es: ${miRango}</p>`;
+        input.value = "";
+        return;
+    }
+
+    if (texto === "/coins") {
+        chat.innerHTML += `<p>💰 Monedas: ${monedas}</p>`;
+        input.value = "";
+        return;
+    }
+
+    if (texto === "/admin") {
+        if (miRango === "ADMIN") {
+            chat.innerHTML += `<p style="color:red;">👑 ADMIN conectado</p>`;
+        } else {
+            alert("❌ No sos admin");
+        }
+        input.value = "";
+        return;
+    }
+
+    if (texto === "/help") {
+        chat.innerHTML += `
+        <p>📜 Comandos:</p>
+        <p>/vip /coins /help</p>
+        <p>ADMIN: /clear /admin</p>
+        `;
+        input.value = "";
+        return;
+    }
+
+    /* ===== MENSAJE NORMAL ===== */
+    let color = "black";
+    let tag = "";
+    let borrar = "";
+
+    if (miRango === "VIP") {
+        color = "gold";
+        tag = "[VIP] ";
+    }
+
+    if (miRango === "ADMIN") {
+        color = "red";
+        tag = "[ADMIN] ";
+        borrar = "<button onclick='this.parentElement.remove()'>❌</button>";
+    }
+
+    chat.innerHTML += `
+    <div>
+        <b style="color:${color}">${tag}${miNombre}:</b>
+        ${texto} ${borrar}
+    </div>
+    `;
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+
+
+
+<h2>🎟️ Pases</h2>
+<input id="codigo" placeholder="Código VIP o ADMIN">
+<button onclick="activarPase()">Activar</button>
+<p id="estado"></p>
+
+<hr>
+
+
+
+
+<script>
+let miNombre = "Valen";
+let miRango = localStorage.getItem("rango") || "NORMAL";
+document.getElementById("estado").innerHTML = "Rango: " + miRango;
+
+function activarPase() {
+    let codigo = document.getElementById("codigo").value;
+
+    if (codigo === "VIPVAL") {
+        miRango = "VIP";
+        alert("🎉 Sos VIPVAL");
+    } else if (codigo === "ADMINVAL") {
+        miRango = "ADMIN";
+        alert("👑 Sos ADMINVAL");
+    } else {
+        alert("❌ Código incorrecto");
+        return;
+    }
+
+    localStorage.setItem("rango", miRango);
+    document.getElementById("estado").innerHTML = "Rango: " + miRango;
+}
+
+function enviar() {
+    let chat = document.getElementById("chat");
+    let input = document.getElementById("mensajeInput");
+    let texto = input.value;
+
+    if (texto === "") return;
+
+    let color = "black";
+    let etiqueta = "";
+
+    if (miRango === "VIP") {
+        color = "gold";
+        etiqueta = "[VIP] ";
+    }
+    if (miRango === "ADMIN") {
+        color = "red";
+        etiqueta = "[ADMIN] ";
+    }
+
+    chat.innerHTML +=
+        "<p><b style='color:" + color + "'>" +
+        etiqueta + miNombre + ":</b> " + texto + "</p>";
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<audio id="click">
+    <source src="click.mp3" type="audio/mpeg">
+</audio>
+
+<div class="estrellas"></div>
+
+<h1 style="color: red;">¡Hola tryhard!</h1>
+<h2>Mis cosas favoritas</h2>
+<ul>
+    <li>Videojuegos 🎮</li>
+    <li>Helado 🍦</li>
+    <li>computadora🖥️</li>
+</ul>
+<button>Haz clic aquí-></button>
+<a href="https://www.youtube.com/@aquivalen">mi canal suscribite porfa</a>
+
+    
+    
+    
+    <!-- Botón de enlace (ejemplo seguro) -->
+    <br>
+    
+        
+    </a>
+
+    <!-- Música que suena sola -->
+    <audio autoplay loop>
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+	
+	
+	<a href="https://www.mercadolibre.com.ar/smartwatch-reloj-udfine-watch-gear-alexa-llamadas-deportes-sumergible-salud-2-mallas-negro/p/MLA36891504#polycard_client=search-nordic&search_layout=stack&position=5&type=product&tracking_id=a43b06e0-0a8a-492f-b834-5e08286e411c&wid=MLA2078543924&sid=search" target="_blank">
+    <button>compralo aca</button>
+
+<br><br>
+<img src="reloj.webp" style="height:200px;">
+</a>
+<img src="7.png" width="150">
+<br>
+<br>
+<p>Promocione este reloj en un <a href="https://www.youtube.com/watch?v=SgwD6tcFGnY">video</a> de Aqui Valen compralo y probalo lo probo El Rincon de Cabra</p>
+
+
+<script>
+
+</script>
+
+</script>
+<h2 id="saludo"></h2>
+<input id="nombre" placeholder="Tu nombre">
+<button onclick="guardarNombre()">Guardar nombre</button>
+
+<div style="height: 1500px;"></div>
+
+<script>
+let mensajes = [
+    "Hola 😄",
+    "¿Te gusta mi web? 🚀",
+    "Suscribite a mi canal 😎",
+    "Estoy aprendiendo a programar 💻",
+    "Esto es re pro 🔥"
+];
+
+function mensaje() {
+    let chat = document.getElementById("chat");
+    let texto = mensajes[Math.floor(Math.random() * mensajes.length)];
+    chat.innerHTML += "<p>" + texto + "</p>";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+<script>
+
+
+</script>
+<script>
+<script>
+let miNombre = "Valen";
+let miRango = "VIP"; // NORMAL, VIP o ADMIN
+
+function enviar() {
+    let chat = document.getElementById("chat");
+    let input = document.getElementById("mensajeInput");
+
+    if (!chat || !input) {
+        alert("Error: no encuentra el chat o el input");
+        return;
+    }
+
+    let texto = input.value;
+
+    if (texto === "") return;
+
+    let color = "black";
+    let etiqueta = "";
+
+    if (miRango === "VIP") {
+        color = "gold";
+        etiqueta = "[VIP] ";
+    }
+
+    if (miRango === "ADMIN") {
+        color = "red";
+        etiqueta = "[ADMIN] ";
+    }
+
+    chat.innerHTML += 
+        "<p><b style='color:" + color + "'>" +
+        etiqueta + miNombre + ":</b> " + texto + "</p>";
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+

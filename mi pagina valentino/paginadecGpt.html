@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Espacio Digital</title>
+
+<style>
+:root {
+  --color: #7fffd4;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #050505, #000);
+  color: var(--color);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  min-height: 100vh;
+  transition: 0.5s;
+}
+
+h1 {
+  margin-top: 15px;
+  font-size: 26px;
+}
+
+#estado {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+#contenedor {
+  max-width: 520px;
+  margin: auto;
+  padding: 10px;
+}
+
+#texto {
+  margin: 15px auto;
+  font-size: 18px;
+  min-height: 90px;
+}
+
+.grande #texto,
+.grande input,
+.grande button {
+  font-size: 22px;
+}
+
+input {
+  width: 90%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  margin: 4px;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--color);
+  color: #000;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#historial {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-top: 10px;
+}
+
+.brillo {
+  box-shadow: 0 0 25px var(--color);
+}
+
+.particula {
+  position: fixed;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: subir linear infinite;
+}
+
+@keyframes subir {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-200px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌌 Mi Espacio Digital</h1>
+<div id="estado">Listo</div>
+
+<div id="contenedor">
+  <div id="texto"></div>
+
+  <input id="entrada" placeholder="Escribí algo…" />
+  <br>
+
+  <button onclick="enviar()">Enviar</button>
+  <button onclick="apoyo()">🫶 Apoyo</button>
+  <button onclick="respirar()">🧘 Calma</button>
+  <button onclick="letras()">👀 Letras</button>
+  <button onclick="color()">🌈 Color</button>
+  <button onclick="modoSordo()">🧏</button>
+  <button onclick="reiniciar()">↺</button>
+
+  <div id="historial"></div>
+</div>
+
+<script>
+let modoSordoActivo = true;
+let modoCalma = false;
+let letrasGrandes = false;
+
+let ultimo = localStorage.getItem("ultimo") || "";
+
+function escribir(txt) {
+  const t = document.getElementById("texto");
+  const estado = document.getElementById("estado");
+  estado.textContent = "Escribiendo…";
+  t.textContent = "";
+
+  let i = 0;
+  const vel = modoCalma ? 70 : 30;
+
+  const int = setInterval(() => {
+    t.textContent += txt.charAt(i);
+    i++;
+    if (i >= txt.length) {
+      clearInterval(int);
+      estado.textContent = "Listo";
+      avisoVisual();
+    }
+  }, vel);
+}
+
+function enviar() {
+  const v = entrada.value.toLowerCase();
+  entrada.value = "";
+  ultimo = v;
+  localStorage.setItem("ultimo", v);
+
+  if (v.includes("hola"))
+    escribir("Hola 👋 gracias por estar acá.");
+  else if (v.includes("triste"))
+    escribir("Gracias por decirlo 💙 no estás solo.");
+  else if (v.includes("ayuda"))
+    escribir("Estoy acá para ayudarte.");
+  else
+    escribir("Te leo con atención.");
+
+  actualizarHistorial();
+}
+
+function apoyo() {
+  const frases = [
+    "Vas bien 🌱",
+    "No hace falta apurarse.",
+    "Lo que sentís importa.",
+    "Estoy con vos 💙",
+    "Gracias por intentarlo."
+  ];
+  escribir(frases[Math.floor(Math.random()*frases.length)]);
+}
+
+function respirar() {
+  modoCalma = !modoCalma;
+  escribir(
+    modoCalma
+    ? "Respirá… inhalá… exhalá… 🧘"
+    : "Seguimos cuando quieras."
+  );
+}
+
+function letras() {
+  letrasGrandes = !letrasGrandes;
+  document.body.classList.toggle("grande");
+}
+
+function color() {
+  const colores = ["#7fffd4", "#ffb6c1", "#add8e6", "#98fb98", "#ffd700"];
+  document.documentElement.style.setProperty(
+    "--color",
+    colores[Math.floor(Math.random()*colores.length)]
+  );
+}
+
+function modoSordo() {
+  modoSordoActivo = !modoSordoActivo;
+  escribir(
+    modoSordoActivo
+    ? "🧏 Modo sordo activado."
+    : "🔇 Modo sordo desactivado."
+  );
+}
+
+function avisoVisual() {
+  if (!modoSordoActivo) return;
+  document.body.classList.add("brillo");
+  setTimeout(() => document.body.classList.remove("brillo"), 400);
+}
+
+function actualizarHistorial() {
+  document.getElementById("historial").textContent =
+    ultimo ? "📝 Último mensaje: " + ultimo : "";
+}
+
+function reiniciar() {
+  ultimo = "";
+  localStorage.clear();
+  actualizarHistorial();
+  escribir("Empezamos de nuevo ✨");
+}
+
+function particula() {
+  if (modoCalma) return;
+  const p = document.createElement("div");
+  p.className = "particula";
+  p.style.left = Math.random() * window.innerWidth + "px";
+  p.style.animationDuration = (2 + Math.random()*3) + "s";
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 4000);
+}
+
+setInterval(particula, 220);
+
+actualizarHistorial();
+escribir("Bienvenido 💙 Este espacio fue hecho para cuidar.");
+</script>
+
+</body>
+</html>
+
+

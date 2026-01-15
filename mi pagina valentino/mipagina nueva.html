@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flappy Bird con Opciones y Inicio tocando pájaro</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: skyblue;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      gap: 10px;
+      padding: 20px;
+    }
+
+    /* Contenedor de todo */
+    #contenedor {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Opciones a los lados */
+    .opciones {
+      background: white;
+      border: 2px solid black;
+      padding: 10px;
+      width: 150px;
+      height: 500px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    canvas {
+      background-color: lightgreen;
+      border: 3px solid black;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background-color: orange;
+      color: black;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: darkorange;
+      color: white;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="contenedor">
+
+    <div class="opciones" id="izquierda">
+      <h2>Opciones</h2>
+      <button onclick="reiniciarJuego()">Reiniciar</button>
+      <button onclick="alert('Próximamente...')">Opción 2</button>
+      <button onclick="alert('Próximamente...')">Opción 3</button>
+    </div>
+
+    <canvas id="juego" width="400" height="500"></canvas>
+
+    <div class="opciones" id="derecha">
+      <h2>Más opciones</h2>
+      <button onclick="alert('Próximamente...')">Opción A</button>
+      <button onclick="alert('Próximamente...')">Opción B</button>
+      <button onclick="alert('Próximamente...')">Opción C</button>
+    </div>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById("juego");
+    const ctx = canvas.getContext("2d");
+
+    const birdImg = new Image();
+    birdImg.src = "p.jpg"; // tu imagen local en la misma carpeta
+
+    let birdY = 150;
+    let birdSpeed = 0;
+    const gravity = 0.5;
+
+    let pipeX = 400;
+    const pipeGap = 120;
+    let pipeHeight = Math.random() * 200 + 50;
+
+    let score = 0;
+    let gameOver = false;
+    let juegoIniciado = false;  // NUEVO: para saber si ya empezó
+
+    // Para detectar clic en el pájaro
+    canvas.addEventListener("mousedown", (e) => {
+      // Solo si no está el juego terminado
+      if (!gameOver) {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+
+        // El pájaro está en x=80 y tiene ancho=40, y su posición vertical es birdY y altura 40
+        if (
+          clickX >= 80 && clickX <= 120 &&
+          clickY >= birdY && clickY <= birdY + 40
+        ) {
+          if (!juegoIniciado) {
+            juegoIniciado = true; // empieza el juego al tocar el pájaro
+            birdSpeed = -8;
+            draw();
+          } else {
+            birdSpeed = -8; // si ya empezó, hace que el pájaro suba
+          }
+        }
+      }
+    });
+
+    birdImg.onload = function() {
+      dibujarPantallaInicio();
+    };
+
+    function iniciarJuego() {
+      birdY = 150;
+      birdSpeed = 0;
+      pipeX = 400;
+      pipeHeight = Math.random() * 200 + 50;
+      score = 0;
+      gameOver = false;
+      juegoIniciado = false;
+      dibujarPantallaInicio();
+    }
+
+    function reiniciarJuego() {
+      iniciarJuego();
+    }
+
+    function dibujarPantallaInicio() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "black";
+      ctx.font = "30px Arial";
+      ctx.fillText("Toca el pájaro para empezar", 50, 200);
+      ctx.drawImage(birdImg, 80, birdY, 40, 40);
+    }
+
+    function draw() {
+      if (!juegoIniciado) return; // No dibuja si no empezó
+
+      ctx.clearRect(0, 0, 400, 500);
+
+      ctx.drawImage(birdImg, 80, birdY, 40, 40);
+
+      birdSpeed += gravity;
+      birdY += birdSpeed;
+
+      ctx.fillStyle = "green";
+      ctx.fillRect(pipeX, 0, 50, pipeHeight);
+      ctx.fillRect(pipeX, pipeHeight + pipeGap, 50, 500);
+      pipeX -= 3;
+
+      if (pipeX < -50) {
+        pipeX = 400;
+        pipeHeight = Math.random() * 200 + 50;
+        score++;
+      }
+
+      if (
+        birdY < 0 ||
+        birdY + 40 > 500 ||
+        (pipeX < 110 && pipeX + 50 > 80 &&
+          (birdY < pipeHeight || birdY + 40 > pipeHeight + pipeGap))
+      ) {
+        gameOver = true;
+        juegoIniciado = false;
+        ctx.fillStyle = "black";
+        ctx.font = "30px Arial";
+        ctx.fillText("¡Perdiste! 😢", 130, 250);
+        return;
+      }
+
+      ctx.fillStyle = "black";
+      ctx.font = "20px Arial";
+      ctx.fillText("Puntos: " + score, 10, 30);
+
+      if (!gameOver) {
+        requestAnimationFrame(draw);
+      }
+    }
+
+    iniciarJuego();
+  </script>
+</body>
+</html>

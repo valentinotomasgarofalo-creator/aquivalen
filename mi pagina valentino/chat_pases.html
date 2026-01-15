@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat con Pases</title>
+</head>
+
+<body>
+
+<h2>🎟️ Pases</h2>
+<input id="codigo" placeholder="Código VIP o ADMIN">
+<button onclick="activarPase()">Activar</button>
+<p id="estado"></p>
+
+<hr>
+
+<h2>💬 Chat</h2>
+
+<div id="chat" style="
+border:2px solid black;
+width:250px;
+height:150px;
+overflow:auto;
+background:white;
+padding:5px;
+">
+</div>
+
+<br>
+
+<input id="mensajeInput" placeholder="Escribí tu mensaje">
+<button onclick="enviar()">Enviar</button>
+
+<script>
+let miNombre = "Valen";
+let miRango = localStorage.getItem("rango") || "NORMAL";
+document.getElementById("estado").innerHTML = "Rango: " + miRango;
+
+function activarPase() {
+    let codigo = document.getElementById("codigo").value;
+
+    if (codigo === "VIP123") {
+        miRango = "VIP";
+        alert("🎉 Sos VIP");
+    } else if (codigo === "ADMIN123") {
+        miRango = "ADMIN";
+        alert("👑 Sos ADMIN");
+    } else {
+        alert("❌ Código incorrecto");
+        return;
+    }
+
+    localStorage.setItem("rango", miRango);
+    document.getElementById("estado").innerHTML = "Rango: " + miRango;
+}
+
+function enviar() {
+    let chat = document.getElementById("chat");
+    let input = document.getElementById("mensajeInput");
+    let texto = input.value;
+
+    if (texto === "") return;
+
+    let color = "black";
+    let etiqueta = "";
+
+    if (miRango === "VIP") {
+        color = "gold";
+        etiqueta = "[VIP] ";
+    }
+    if (miRango === "ADMIN") {
+        color = "red";
+        etiqueta = "[ADMIN] ";
+    }
+
+    chat.innerHTML +=
+        "<p><b style='color:" + color + "'>" +
+        etiqueta + miNombre + ":</b> " + texto + "</p>";
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>

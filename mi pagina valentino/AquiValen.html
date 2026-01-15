@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Aquí Valen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: white;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 35px 20px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+/* PERFIL */
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  background: url("logo.png") center/cover no-repeat;
+  border: 3px solid red;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin: 10px 0 5px;
+}
+
+.bio {
+  font-size: 1rem;
+  opacity: 0.75;
+  margin-bottom: 25px;
+}
+
+/* BOTONES */
+.link {
+  display: block;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  padding: 18px;
+  margin: 14px 0;
+  border-radius: 15px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: 1px solid #222;
+  transition: 0.25s;
+}
+
+.link:hover {
+  transform: scale(1.03);
+}
+
+/* DESTACADOS */
+.destacado {
+  background: red;
+  box-shadow: 0 0 25px red;
+  font-size: 1.15rem;
+}
+
+.destacado:hover {
+  background: white;
+  color: black;
+}
+
+.secundario {
+  border: 1px dashed #333;
+}
+
+/* TEXTO EXTRA */
+.stats {
+  margin-top: 25px;
+  font-size: 0.85rem;
+  opacity: 0.5;
+}
+
+.cta {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- PERFIL -->
+  <div class="avatar"></div>
+  <h1>Aquí Valen</h1>
+  <p class="bio">Videos • Ideas • Creatividad</p>
+
+  <!-- BOTÓN PRINCIPAL -->
+  <a class="link destacado" href="https://www.youtube.com/@AquiValen" target="_blank">
+    🔔 Suscribite
+  </a>
+
+  <!-- LINKS -->
+  <a class="link" href="https://www.youtube.com/@AquiValen" target="_blank">
+    ▶️ YouTube
+  </a>
+
+
+
+
+  <!-- EXTRA -->
+  <p class="stats">+ personas ya pasaron por acá</p>
+  <p class="cta">📬 Activá la campanita en YouTube</p>
+
+</div>
+
+</body>
+</html>
+

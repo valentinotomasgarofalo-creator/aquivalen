@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>AquiValen - Tecnología</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+.card:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--card);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.navbar a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+:root {
+  --bg: #0f0f0f;
+  --card: #161616;
+  --text: #ffffff;
+  --accent: #00eaff;
+}
+
+.light {
+  --bg: #f2f2f2;
+  --card: #ffffff;
+  --text: #000000;
+  --accent: #0077ff;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+  transition: 0.3s;
+}
+
+section {
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 3em;
+  color: var(--accent);
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 600px;
+  border-radius: 15px;
+}
+
+button, .btn {
+  background: var(--accent);
+  color: #000;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1em;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.stats div {
+  margin: 10px 0;
+}
+
+.bar {
+  height: 10px;
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+}
+/* Animación de entrada */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delay suave */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+/* Cards flotando */
+.card {
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Botón estilo Apple */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.3);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+/* Pulso elegante */
+.pulse {
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,234,255,0.6); }
+  70% { box-shadow: 0 0 0 20px rgba(0,234,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,234,255,0); }
+}
+:root {
+  --bg: #0f0f0f;
+  --card: #161616;
+  --text: #ffffff;
+  --accent: #00eaff;
+}
+
+body.light {
+  --bg: #f2f2f2;
+  --card: #ffffff;
+  --text: #000000;
+  --accent: #0077ff;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 15px;
+  transition: background 0.4s ease;
+}
+
+button {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<button document.body.classList.toggle("light"); class="toggle" onclick="toggleMode()">🌙 / ☀️</button>
+
+<section>
+ <h1 class="fade-up">AquiValen</h1>
+ <p class="fade-up delay-1">Tecnología, pruebas y curiosidades</p>
+  <a class="btn" href="https://www.youtube.com/@aquivalen" target="_blank">🔥 Suscribite</a>
+</section>
+
+<section class="card">
+  <h2>🔔 Novedades</h2>
+  <p>Nuevo video pronto 👀<br>Probando algo tecnológico...</p>
+</section>
+
+<section class="card">
+  <h2>👥 ¿Para quién es este canal?</h2>
+  <p>👦 Principiantes<br>🧑‍💻 Curiosos<br>🤯 Amantes de la tecnología</p>
+</section>
+<section class="card reveal">
+  <h2>⭐ Recomendado por Valen</h2>
+  <p>🔧 App útil<br>🌐 Página copada<br>⚙️ Herramienta tech</p>
+</section>
+<section class="card reveal">
+  <h2>🕒 Timeline</h2>
+  <p>🚀 Inicio del canal</p>
+  <p>⚡ Primer experimento</p>
+  <p>🔥 Video especial</p>
+</section>
+
+<section class="card">
+  <h2>🖥️ Mi setup / herramientas</h2>
+  <p>PC • Celular • Apps útiles • Herramientas tech</p>
+</section>
+
+<section class="card stats">
+  <h2>⚡ Contenido del canal</h2>
+
+  <div>
+    Tecnología
+    <div class="bar"><div class="fill" style="width:90%"></div></div>
+  </div>
+
+  <div>
+    Pruebas
+    <div class="bar"><div class="fill" style="width:75%"></div></div>
+  </div>
+
+  <div>
+    Apps
+    <div class="bar"><div class="fill" style="width:60%"></div></div>
+  </div>
+</section>
+
+
+<section class="card">
+  <h2>🚀 Acciones rápidas</h2>
+  <a class="btn" href="https://www.youtube.com/@aquivalen" target="_blank">📺 Ir al canal</a>
+  <a class="btn" href="#">🧪 Próximos videos</a>
+</section>
+
+<section>
+  <p><i>“La tecnología no es difícil, solo hay que explicarla bien.” ⚡</i></p>
+</section>
+
+<script>
+function toggleMode() {
+  document.body.classList.toggle("light");
+}
+<button onclick="demo()">🎥 Demo Apple</button>
+
+function demo(){
+  document.querySelectorAll(".card").forEach((c,i)=>{
+    setTimeout(()=>c.classList.add("show"), i*400);
+  });
+}
+</script>
+
+<div class="navbar">
+  <a href="#">🏠</a>
+  <a href="https://www.youtube.com/@aquivalen" target="_blank">📺</a>
+  <a href="#">⚡</a>
+</div>
+
+</body>
+</html>
+

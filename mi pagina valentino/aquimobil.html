@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aqui Valen</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body{
+  background: linear-gradient(180deg,#020617,#020617);
+  color:white;
+  display:flex;
+  justify-content:center;
+}
+
+.container{
+  width:100%;
+  max-width:420px;
+  padding:24px 16px 40px;
+}
+
+/* Avatar */
+.avatar{
+  display:flex;
+  justify-content:center;
+  margin-top:16px;
+}
+
+.avatar img{
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  border:2px solid #334155;
+}
+
+/* Nombre */
+h1{
+  text-align:center;
+  margin-top:14px;
+  font-size:22px;
+  font-weight:800;
+}
+
+/* Bio */
+.bio{
+  text-align:center;
+  font-size:14px;
+  opacity:.75;
+  margin-top:6px;
+  margin-bottom:22px;
+}
+
+/* Botones */
+.links{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.links a{
+  text-decoration:none;
+  color:white;
+  background:#0f172a;
+  padding:14px;
+  border-radius:14px;
+  text-align:center;
+  font-size:15px;
+  border:1px solid #1e293b;
+  transition:.15s;
+}
+
+.links a:hover{
+  background:#1e293b;
+}
+
+/* Cafecito destacado */
+.cafe{
+  margin-top:26px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  border-radius:16px;
+  padding:16px;
+  border:1px solid #334155;
+}
+
+.cafe h2{
+  font-size:16px;
+  margin-bottom:6px;
+}
+
+.cafe p{
+  font-size:13px;
+  opacity:.75;
+  margin-bottom:12px;
+}
+
+.cafe a{
+  display:block;
+  text-align:center;
+  background:white;
+  color:black;
+  padding:12px;
+  border-radius:12px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+/* Footer */
+footer{
+  margin-top:32px;
+  text-align:center;
+  font-size:12px;
+  opacity:.4;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- Avatar -->
+  <div class="avatar">
+    <img src="avatar.jpg" alt="Aqui Valen">
+  </div>
+
+  <!-- Nombre -->
+  <h1>@aquivalen</h1>
+
+  <!-- Bio -->
+  <div class="bio">
+    Videos, ideas y cosas mías.<br>
+    Bienvenido 🥛
+  </div>
+
+  <!-- Links -->
+  <div class="links">
+    <a href="https://www.youtube.com/@aquivalen" target="_blank">📺 YouTube</a>
+    <a href="quien-soy.html">👋 Quién soy</a>
+    <a href="cafecito.html">🥛 Invitame una lechita</a>
+  </div>
+
+  <!-- Cafecito -->
+  <div class="cafe">
+    <h2>¿Te gusta el contenido?</h2>
+    <p>Una lechita ayuda a que el canal siga creciendo 💙</p>
+    <a href="https://cafecito.app/" target="_blank">Invitar lechita 🥛</a>
+  </div>
+
+  <footer>
+    © Aqui Valen
+  </footer>
+
+</div>
+</body>
+</html>

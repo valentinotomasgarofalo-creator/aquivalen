@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Aqui Valen Web</title>
+
+<style>
+body {
+  background:#111;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+}
+
+#chat {
+  width:300px;
+  height:200px;
+  overflow:auto;
+  border:2px solid white;
+  margin:auto;
+  padding:5px;
+  background:#000;
+}
+
+button {
+  margin:5px;
+  padding:8px 15px;
+  cursor:pointer;
+}
+#robot {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 50px;
+    transition: all 1s ease;
+    z-index: 999;
+}
+
+#robotTexto {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 250px;
+    font-family: Arial;
+    z-index: 999;
+}
+<style>
+.skin-animada {
+  animation: color 2s infinite;
+}
+
+@keyframes color {
+  0% { background: red; }
+  50% { background: yellow; }
+  100% { background: red; }
+ 
+}
+<style>
+#notif {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: yellow;
+  padding: 10px;
+  display: none;
+}
+</style>
+
+</style>
+
+</style>
+</head>
+
+<body>
+
+<h1>Aqui Valen Web</h1>
+
+<hr>
+<h2>👥 Amigos</h2>
+
+<input id="amigoInput" placeholder="Nombre del amigo">
+<button onclick="agregarAmigo()">Agregar</button>
+
+<ul id="listaAmigos"></ul>
+
+<h2>💬 Chat</h2>
+<div id="chat"></div>
+
+<input id="mensajeInput" placeholder="Escribí un mensaje">
+<br>
+<button onclick="enviar()">Enviar</button>
+<div>
+  
+  <p id="escribiendo"></p>
+
+</div>
+<div class="skin-animada" style="padding:10px;">
+  
+</div>
+
+
+<h3>📩 Chat privado</h3>
+<input id="privadoInput" placeholder="Mensaje privado">
+<button onclick="enviarPrivado()">Enviar</button>
+<div id="chatPrivado"></div>
+
+<div id="notif"></div>
+
+
+
+<hr>
+
+<h2>🪙 Monedas</h2>
+<p id="monedasTexto"></p>
+<button onclick="ganarMonedas()">+10 monedas</button>
+
+<hr>
+
+<h2>🛒 Tienda</h2>
+<button onclick="comprarVIP()">VIP (50)</button>
+<button onclick="comprarADMIN()">ADMIN (100)</button>
+<button onclick="comprar()">🔥 VIP 25 monedas</button>
+<p id="estado"></p>
+<h2>🎭 Skins</h2>
+
+<button onclick="comprarSkin('blue')">Skin Azul (20)</button>
+<button onclick="comprarSkin('green')">Skin Verde (20)</button>
+<button onclick="comprarSkin('purple')">Skin Violeta (20)</button>
+<h2>💬 Ayudante</h2>
+
+<div id="npcChat" style="
+background:white;
+color:black;
+width:260px;
+margin:auto;
+padding:10px;
+border-radius:10px;
+border:2px solid black;
+font-size:14px;
+">
+Cargando ayudante...
+</div>
+<div id="mascota">🐶</div>
+<style>
+#mascota {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  font-size: 40px;
+  transition: left 1s linear;
+}
+</style>
+
+
+
+<h3>🖼️ Foto de perfil</h3>
+
+
+  ⭐ Mi perfil animado
+</div>
+
+<img id="fotoPerfil"
+     src="https://i.imgur.com/1X4h7Qy.png"
+     width="120"
+     style="border-radius:50%; border:3px solid black;">
+
+<br><br>
+
+<input type="file" id="subirFoto" accept="image/*">
+<button onclick="guardarFoto()">Guardar foto</button>
+
+<h2>👤 Mi Perfil</h2>
+
+<input id="nombre" placeholder="Tu nombre">
+<button onclick="eventoRandom()">🎲 Evento Random</button>
+<p id="eventoTexto"></p>
+
+<br><br>
+<script>
+
+function comprar() {
+  alert("🎉 Compraste con descuento!");
+}
+
+
+let escribiendo = document.getElementById("escribiendo");
+
+document.getElementById("mensajeInput").addEventListener("input", () => {
+  escribiendo.innerHTML = "✍️ Escribiendo...";
+  setTimeout(() => escribiendo.innerHTML = "", 1000);
+});
+
+
+
+function enviarPrivado() {
+  let texto = document.getElementById("privadoInput").value;
+  if (texto === "") return;
+  document.getElementById("chatPrivado").innerHTML += "<p>📩 " + texto + "</p>";
+  document.getElementById("privadoInput").value = "";
+}
+<script>
+function notificar(texto) {
+  let n = document.getElementById("notif");
+  n.innerHTML = texto;
+  n.style.display = "block";
+  setTimeout(() => n.style.display = "none", 2000);
+}
+
+// ejemplo
+notificar("+10 monedas 💰");
+</script>
+
+<script>
+
+    if (monedas < 20) {
+        alert("❌ No tenés monedas");
+        return;
+    }
+
+    monedas -= 20;
+    localStorage.setItem("monedas", monedas);
+    localStorage.setItem("skin", color);
+
+    aplicarSkin();
+}
+<script>
+let posMascota = 0;
+setInterval(() => {
+  posMascota += 50;
+  if (posMascota > window.innerWidth) posMascota = 0;
+  document.getElementById("mascota").style.left = posMascota + "px";
+}, 1000);
+</script>
+
+<script>
+let amigos = JSON.parse(localStorage.getItem("amigos")) || [];
+
+function agregarAmigo() {
+    let nombre = document.getElementById("amigoInput").value;
+    if (nombre === "") return;
+
+    amigos.push(nombre);
+    localStorage.setItem("amigos", JSON.stringify(amigos));
+    document.getElementById("amigoInput").value = "";
+    mostrarAmigos();
+}
+
+function mostrarAmigos() {
+    let lista = document.getElementById("listaAmigos");
+    lista.innerHTML = "";
+
+    amigos.forEach(a => {
+        lista.innerHTML += "<li>🟢 " + a + "</li>";
+    });
+}
+
+mostrarAmigos();
+<script>
+let mensajesNPC = [
+    "👋 Bienvenido a la web",
+    "💰 Ganá monedas jugando",
+    "🎭 Comprá skins en la tienda",
+    "👥 Agregá amigos",
+    "🔥 Esto es re pro"
+];
+
+function hablarNPC() {
+    let npc = document.getElementById("npcChat");
+    let texto = mensajesNPC[Math.floor(Math.random() * mensajesNPC.length)];
+    npc.innerHTML = "<b>NPC:</b> " + texto;
+}
+
+setInterval(hablarNPC, 5000);
+hablarNPC();
+</script>
+
+</script>
+
+</script>
+
+</script>
+
+
+<select id="titulo">
+  <option>Jugador</option>
+  <option>PRO</option>
+  <option>TRYHARD</option>
+  <option>VIP</option>
+</select>
+<br><br>
+
+<select id="color">
+  <option value="black">Negro</option>
+  <option value="red">Rojo</option>
+  <option value="blue">Azul</option>
+  <option value="green">Verde</option>
+</select>
+<br><br>
+
+<select id="avatar">
+  <option value="😀">😀</option>
+  <option value="😎">😎</option>
+  <option value="🤖">🤖</option>
+  <option value="👾">👾</option>
+</select>
+<br><br>
+
+<button onclick="guardarPerfil()">Guardar perfil</button>
+
+<hr>
+
+<div id="perfilMostrado"></div>
+
+
+<script>
+/* ===== DATOS ===== */
+let miNombre = localStorage.getItem("nombreJugador") || "aquivalenofficial";
+let monedas = Number(localStorage.getItem("monedas")) || 0;
+let miRango = localStorage.getItem("rango") || "NORMAL";
+
+
+
+/* ===== MOSTRAR ===== */
+function mostrar() {
+  document.getElementById("monedasTexto").innerText = "Monedas: " + monedas;
+  document.getElementById("estado").innerText = "Rango: " + miRango;
+}
+mostrar();
+
+/* ===== MONEDAS ===== */
+function ganarMonedas() {
+  monedas += 10;
+  guardar();
+}
+
+/* ===== TIENDA ===== */
+function comprarVIP() {
+  if (monedas >= 50) {
+    monedas -= 50;
+    miRango = "VIP";
+    guardar();
+    alert("⭐ Ahora sos VIP");
+  } else alert("❌ No alcanza");
+}
+
+function comprarADMIN() {
+  if (monedas >= 100) {
+    monedas -= 100;
+    miRango = "ADMIN";
+    guardar();
+    alert("👑 Ahora sos ADMIN");
+  } else alert("❌ No alcanza");
+}
+
+/* ===== CHAT ===== */
+function enviar() {
+  let chat = document.getElementById("chat");
+  let input = document.getElementById("mensajeInput");
+  if (input.value === "") return;
+
+  let tag = "";
+  let color = "white";
+  let borrar = "";
+
+  if (miRango === "VIP") {
+    tag = "[VIP] ";
+    color = "gold";
+  }
+
+  if (miRango === "ADMIN") {
+    tag = "[ADMIN] ";
+    color = "red";
+    borrar = "<button onclick='this.parentElement.remove()'>❌</button>";
+  }
+
+  chat.innerHTML += `
+    <div>
+      <b style="color:${color}">${tag}${miNombre}:</b>
+      ${input.value} ${borrar}
+    </div>
+  `;
+
+  input.value = "";
+  chat.scrollTop = chat.scrollHeight;
+}
+
+/* ===== GUARDAR ===== */
+function guardar() {
+  localStorage.setItem("monedas", monedas);
+  localStorage.setItem("rango", miRango);
+  mostrar();
+}
+let pasos = [
+    "¡Hola! 🤖 Soy Robo-Valen y te voy a explicar la web",
+    "💬 Acá tenés el chat para hablar",
+    "🪙 Ganás monedas jugando",
+    "🛒 En la tienda comprás VIP y ADMIN",
+    "🎯 Completá misiones para ganar más monedas",
+    "😎 ¡Divertite explorando la página!"
+];
+
+let posiciones = [
+    { left: "20px", bottom: "20px" },
+    { left: "50%", bottom: "20px" },
+    { left: "50%", bottom: "50%" },
+    { left: "20px", bottom: "50%" },
+    { left: "70%", bottom: "20px" },
+    { left: "20px", bottom: "20px" }
+];
+
+let pasoActual = 0;
+
+function moverRobot() {
+    let robot = document.getElementById("robot");
+    let texto = document.getElementById("robotTexto");
+
+    robot.style.left = posiciones[pasoActual].left;
+    robot.style.bottom = posiciones[pasoActual].bottom;
+    texto.innerText = pasos[pasoActual];
+
+    pasoActual++;
+    if (pasoActual >= pasos.length) pasoActual = 0;
+}
+
+moverRobot();
+setInterval(moverRobot, 4000);
+
+</script>
+
+
+<script>
+let pasosRobot = [
+  "Hola 👋 Soy el robot guía",
+  "Acá tenés el chat 💬",
+  "Ganás monedas 🪙",
+  "Comprás pases en la tienda 🛒",
+  "¡Explorá la web! 🚀"
+];
+
+let posicionesRobot = [
+  { left: "20px", bottom: "20px" },
+  { left: "50%", bottom: "20px" },
+  { left: "50%", bottom: "50%" },
+  { left: "20px", bottom: "50%" },
+  { left: "20px", bottom: "20px" }
+];
+
+let pasoRobot = 0;
+
+setInterval(() => {
+  const robot = document.getElementById("robot");
+  const texto = document.getElementById("robotTexto");
+
+  if (!robot || !texto) return;
+
+  robot.style.left = posicionesRobot[pasoRobot].left;
+  robot.style.bottom = posicionesRobot[pasoRobot].bottom;
+  texto.innerText = pasosRobot[pasoRobot];
+
+  pasoRobot++;
+  if (pasoRobot >= pasosRobot.length) pasoRobot = 0;
+}, 4000);
+<script>
+function guardarPerfil() {
+  let perfil = {
+    nombre: document.getElementById("nombre").value,
+    titulo: document.getElementById("titulo").value,
+    color: document.getElementById("color").value,
+    avatar: document.getElementById("avatar").value
+  };
+
+  localStorage.setItem("perfil", JSON.stringify(perfil));
+  mostrarPerfil();
+}
+
+function mostrarPerfil() {
+  let perfil = JSON.parse(localStorage.getItem("perfil"));
+  if (!perfil) return;
+
+  document.getElementById("perfilMostrado").innerHTML = `
+    <h3 style="color:${perfil.color}">
+      ${perfil.avatar} ${perfil.nombre}
+    </h3>
+    <p>🏷️ ${perfil.titulo}</p>
+  `;
+}
+
+mostrarPerfil();
+</script>
+
+</script>
+
+<script>
+function actualizarPerfil() {
+    let nombre = localStorage.getItem("nombreJugador") || "Jugador";
+    let rango = localStorage.getItem("rango") || "NORMAL";
+    let monedas = Number(localStorage.getItem("monedas")) || 0;
+    let mensajes = Number(localStorage.getItem("mensajes")) || 0;
+
+    document.getElementById("perfilNombre").innerHTML = "👤 Nombre: " + nombre;
+    document.getElementById("perfilRango").innerHTML = "👑 Rango: " + rango;
+    document.getElementById("perfilMonedas").innerHTML = "💰 Monedas: " + monedas;
+    document.getElementById("perfilMensajes").innerHTML = "💬 Mensajes: " + mensajes;
+}
+
+actualizarPerfil();
+</script>
+<script>
+function guardarFoto() {
+    let input = document.getElementById("subirFoto");
+    let imagen = document.getElementById("fotoPerfil");
+
+    if (input.files.length === 0) {
+        alert("❌ Elegí una foto");
+        return;
+    }
+
+    let archivo = input.files[0];
+    let lector = new FileReader();
+
+    lector.onload = function(e) {
+        imagen.src = e.target.result;
+        localStorage.setItem("fotoPerfil", e.target.result);
+    };
+
+    lector.readAsDataURL(archivo);
+}
+
+// cargar foto guardada
+let fotoGuardada = localStorage.getItem("fotoPerfil");
+if (fotoGuardada) {
+    document.getElementById("fotoPerfil").src = fotoGuardada;
+}
+</script>
+<script>
+window.onload = function () {
+
+    let mensajesNPC = [
+        "👋 Bienvenido a mi web",
+        "💰 Ganá monedas jugando",
+        "🎭 Comprá skins en la tienda",
+        "👥 Agregá amigos",
+        "🔥 Esto está re pro"
+    ];
+
+    function hablarNPC() {
+        let npc = document.getElementById("npcChat");
+        if (!npc) return;
+
+        let texto = mensajesNPC[Math.floor(Math.random() * mensajesNPC.length)];
+        npc.innerHTML = "<b>Ayudante:</b> " + texto;
+    }
+
+    hablarNPC();
+    setInterval(hablarNPC, 5000);
+};
+<script>
+function like(btn) {
+  let contador = btn.nextElementSibling;
+  contador.innerHTML = Number(contador.innerHTML) + 1;
+}
+<script>
+let monedas = 0;
+
+function eventoRandom() {
+  let numero = Math.floor(Math.random() * 3);
+  let texto = document.getElementById("eventoTexto");
+
+  if (numero === 0) {
+    monedas += 10;
+    texto.innerText = "🎉 Ganaste 10 monedas!";
+  } 
+  else if (numero === 1) {
+    monedas -= 5;
+    if (monedas < 0) monedas = 0;
+    texto.innerText = "😱 Perdiste 5 monedas!";
+  } 
+  else {
+    texto.innerText = "🤯 Nada pasó... por ahora";
+  }
+}
+<script>
+let clicks = 0;
+
+function clickSecreto() {
+  clicks++;
+
+  if (clicks === 5) {
+    document.getElementById("secreto").style.display = "block";
+  }
+}
+<p id="secreto" style="display:none; color:red;">
+🐣 ¡Encontraste el Easter Egg!
+</p>
+</script>
+
+
+</script>
+
+</script>
+
+
+<button onclick="clickSecreto()">Haz click 😏</button>
+
+</body>
+</html>

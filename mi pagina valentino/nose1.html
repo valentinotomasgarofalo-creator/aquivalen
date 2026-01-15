@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Detectives Interactivo</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(to bottom, #a0e7e5, #b4f8c8);
+    overflow-x: hidden;
+    text-align: center;
+  }
+
+  h1 {
+    color: #ff6f91;
+    text-shadow: 2px 2px #000;
+    margin: 20px 0;
+  }
+
+  .building {
+    width: 330px;
+    margin: 0 auto 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+  }
+
+  .window {
+    width: 100px;
+    height: 100px;
+    background-color: #ffd6a5;
+    border: 2px solid #ffb4a2;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+  }
+
+  .window:hover {
+    transform: scale(1.1);
+  }
+
+  .window img {
+    width: 60px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .message {
+    font-size: 20px;
+    color: #333;
+    min-height: 30px;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    background-color: #ff6f91;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 2px 2px 5px #000;
+    transition: transform 0.2s;
+  }
+
+  .button:hover {
+    transform: scale(1.1);
+  }
+
+  /* Confeti */
+  .confetti {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    border-radius: 50%;
+    animation: fall 2s linear forwards;
+  }
+
+  @keyframes fall {
+    from { top: 0; opacity: 1; }
+    to { top: 400px; opacity: 0; }
+  }
+
+  /* Burbujas */
+  .bubble {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: rgba(173, 216, 230, 0.7);
+    cursor: pointer;
+    animation: rise 4s linear forwards;
+  }
+
+  @keyframes rise {
+    from { bottom: 0; opacity: 1; }
+    to { bottom: 500px; opacity: 0; }
+  }
+
+  /* Detective */
+  .detective {
+    width: 60px;
+    position: absolute;
+    bottom: 0;
+    transition: left 1s ease-in-out;
+    cursor: pointer;
+  }
+
+  /* Objetos arrastrables */
+  .dragItem {
+    width: 50px;
+    position: absolute;
+    cursor: grab;
+  }
+
+</style>
+</head>
+<body>
+
+<h1>Mini Detectives Interactivo</h1>
+
+<div class="building">
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+  <div class="window" onclick="revelarSorpresa(this)"></div>
+</div>
+
+<div class="message" id="message">¡Haz clic en una ventana para descubrir una sorpresa!</div>
+
+<button class="button" onclick="crearConfeti()">¡Lluvia de Confeti!</button>
+<button class="button" onclick="crearBurbuja()">¡Burbujas!</button>
+<button class="button" onclick="crearFruta()">¡Frutas para atrapar!</button>
+
+<!-- Detective -->
+<img id="detective" class="detective" src="https://i.imgur.com/1Q3xvqa.png" alt="Detective">
+
+<!-- Objetos arrastrables -->
+<img id="hat" class="dragItem" src="https://i.imgur.com/1Q3xvqa.png" style="top:10px; left:20px;">
+<img id="lupa" class="dragItem" src="https://i.imgur.com/fGZK8lF.png" style="top:10px; left:100px;">
+
+<!-- Sonidos -->
+<audio id="audio-gato" src="https://www.soundjay.com/animal/cat-meow-2.mp3"></audio>
+<audio id="audio-perro" src="https://www.soundjay.com/animal/dog-bark-1.mp3"></audio>
+<audio id="audio-campana" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+
+<script>
+  // Sorpresas
+  const sorpresas = [
+    { tipo: 'animal', nombre: 'Gatito', img: 'https://i.imgur.com/6b7B4Ii.png', sonido: 'audio-gato' },
+    { tipo: 'animal', nombre: 'Perrito', img: 'https://i.imgur.com/l9HhTyz.png', sonido: 'audio-perro' },
+    { tipo: 'objeto', nombre: 'Sombrero de Detective', img: 'https://i.imgur.com/1Q3xvqa.png', sonido: 'audio-campana' },
+    { tipo: 'objeto', nombre: 'Lupa Mágica', img: 'https://i.imgur.com/fGZK8lF.png', sonido: 'audio-campana' }
+  ];
+
+  function revelarSorpresa(windowDiv) {
+    if (windowDiv.querySelector('img')) return;
+    const sorpresa = sorpresas[Math.floor(Math.random()*sorpresas.length)];
+    const img = document.createElement('img');
+    img.src = sorpresa.img;
+    windowDiv.appendChild(img);
+
+    document.getElementById('message').innerText = '¡Encontraste: ' + sorpresa.nombre + '!';
+    document.getElementById(sorpresa.sonido).play();
+  }
+
+  // Confeti
+  function crearConfeti() {
+    for(let i=0;i<30;i++){
+      const confetti = document.createElement('div');
+      confetti.className='confetti';
+      confetti.style.left=Math.random()*window.innerWidth+'px';
+      confetti.style.backgroundColor='#'+Math.floor(Math.random()*16777215).toString(16);
+      document.body.appendChild(confetti);
+      setTimeout(()=>confetti.remove(),2000);
+    }
+  }
+
+  // Burbujas
+  function crearBurbuja() {
+    for(let i=0;i<10;i++){
+      const bubble=document.createElement('div');
+      bubble.className='bubble';
+      bubble.style.left=Math.random()*window.innerWidth+'px';
+      bubble.onclick=()=>bubble.remove();
+      document.body.appendChild(bubble);
+      setTimeout(()=>bubble.remove(),4000);
+    }
+  }
+
+  // Frutas
+  const frutas = ['https://i.imgur.com/9h3xVQZ.png','https://i.imgur.com/5b2RzQt.png','https://i.imgur.com/lpNml7X.png'];
+  function crearFruta() {
+    const fruta=document.createElement('img');
+    fruta.src=frutas[Math.floor(Math.random()*frutas.length)];
+    fruta.style.width='50px';
+    fruta.style.position='absolute';
+    fruta.style.top=Math.random()*300+'px';
+    fruta.style.left=Math.random()*(window.innerWidth-50)+'px';
+    fruta.style.cursor='pointer';
+    fruta.onclick=()=>fruta.remove();
+    document.body.appendChild(fruta);
+  }
+
+  // Detective animado
+  const detective = document.getElementById('detective');
+  function moverDetective() {
+    detective.style.left=Math.random()*(window.innerWidth-60)+'px';
+  }
+  setInterval(moverDetective,3000);
+
+  // Música
+  const music=document.getElementById('music');
+  music.volume=0.2;
+  music.play().catch(()=>console.log("Interacción requerida para reproducir música"));
+
+  // Drag and drop
+  const draggables=document.querySelectorAll('.dragItem');
+  draggables.forEach(item=>{
+    let offsetX=0,offsetY=0,isDragging=false;
+    item.onmousedown=function(e){
+      isDragging=true;
+      offsetX=e.offsetX;
+      offsetY=e.offsetY;
+    }
+    document.onmousemove=function(e){
+      if(isDragging){
+        item.style.left=(e.pageX-offsetX)+'px';
+        item.style.top=(e.pageY-offsetY)+'px';
+      }
+    }
+    document.onmouseup=function(){isDragging=false;}
+  });
+
+</script>
+</body>
+</html>
+
+
+

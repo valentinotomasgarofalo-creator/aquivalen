@@ -1,0 +1,9 @@
+index.html 
+
+juego.js 
+
+personaje.png
+
+golpe.png
+
+patada.png

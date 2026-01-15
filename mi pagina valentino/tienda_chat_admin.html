@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tienda y Chat</title>
+</head>
+
+<body style="font-family: Arial; background:#e6f2ff; text-align:center;">
+
+<h1>🛒 Tienda de Pases</h1>
+
+<button onclick="comprarVIP()">Comprar VIP</button>
+<button onclick="comprarADMIN()">Comprar ADMIN</button>
+<button onclick="reset()">Quitar pase</button>
+
+<p id="estado"></p>
+
+<hr>
+
+<h2>💬 Chat</h2>
+
+<div id="chat" style="
+border:2px solid black;
+width:300px;
+height:200px;
+overflow:auto;
+background:white;
+padding:5px;
+margin:auto;
+text-align:left;
+">
+</div>
+
+<br>
+
+<input id="mensajeInput" placeholder="Escribí mensaje">
+<button onclick="enviar()">Enviar</button>
+
+<script>
+let miNombre = "Valen";
+let miRango = localStorage.getItem("rango") || "NORMAL";
+mostrarRango();
+
+function mostrarRango() {
+    document.getElementById("estado").innerHTML = "Rango: " + miRango;
+}
+
+function comprarVIP() {
+    miRango = "VIP";
+    localStorage.setItem("rango", miRango);
+    alert("🎉 Compraste VIP");
+    mostrarRango();
+}
+
+function comprarADMIN() {
+    miRango = "ADMIN";
+    localStorage.setItem("rango", miRango);
+    alert("👑 Sos ADMIN");
+    mostrarRango();
+}
+
+function reset() {
+    miRango = "NORMAL";
+    localStorage.setItem("rango", miRango);
+    alert("Volviste a NORMAL");
+    mostrarRango();
+}
+
+function enviar() {
+    let chat = document.getElementById("chat");
+    let texto = document.getElementById("mensajeInput").value;
+    if (texto === "") return;
+
+    let color = "black";
+    let tag = "";
+
+    if (miRango === "VIP") {
+        color = "gold";
+        tag = "[VIP] ";
+    }
+
+    if (miRango === "ADMIN") {
+        color = "red";
+        tag = "[ADMIN] ";
+    }
+
+    let borrar = "";
+    if (miRango === "ADMIN") {
+        borrar = "<button onclick='this.parentElement.remove()'>❌</button>";
+    }
+
+    chat.innerHTML += `
+    <div>
+        <b style="color:${color}">${tag}${miNombre}:</b>
+        ${texto}
+        ${borrar}
+    </div>
+    `;
+
+    document.getElementById("mensajeInput").value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>

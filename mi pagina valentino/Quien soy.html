@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quién soy · Aqui Valen</title>
+
+  <style>
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    body{
+      margin:0;min-height:100vh;color:#fff;
+      background:#020617;
+      display:flex;justify-content:center;align-items:center;
+      padding:40px 20px
+    }
+    .wrap{
+      max-width:900px;width:100%;
+      display:grid;grid-template-columns:220px 1fr;
+      gap:36px;align-items:center
+    }
+    .avatar{
+      width:220px;height:220px;border-radius:50%;
+      padding:5px;
+      background:linear-gradient(135deg,#22d3ee,#6366f1)
+    }
+    .avatar img{
+      width:100%;height:100%;
+      border-radius:50%;
+      object-fit:cover;
+      background:#020617
+    }
+    h1{margin:0 0 12px;font-size:42px}
+    p{opacity:.85;line-height:1.7;margin:0 0 14px}
+    .back{
+      display:inline-block;
+      margin-top:10px;
+      color:#38bdf8;
+      text-decoration:none;
+      font-weight:600
+    }
+
+    @media(max-width:800px){
+      .wrap{grid-template-columns:1fr;text-align:center}
+      .avatar{margin:0 auto}
+    }
+	.topbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(2,6,23,.75);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.topbar-inner{
+  max-width: 760px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.menu{
+  display: flex;
+  gap: 18px;
+}
+
+.menu a{
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: .8;
+  transition: opacity .15s ease;
+}
+
+.menu a:hover{
+  opacity: 1;
+}
+
+  </style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar-inner">
+    <strong class="logo">Aqui Valen</strong>
+
+    <div class="menu">
+      <a href="Aqui-Valen-Bio.html">Inicio</a>
+      <a href="Quien soy.html">Quién soy</a>
+      <a href="lechita.html">Apoyar</a>
+    </div>
+  </div>
+</nav>
+
+  <main class="wrap">
+    <div class="avatar">
+      <img src="logo.png" alt="Aqui Valen">
+    </div>
+
+    <div>
+      <h1>Quién soy</h1>
+
+      <p>
+        Hola, soy <strong>Aqui Valen</strong>. Creo contenido en YouTube donde subo
+        videos de juegos, retos y cosas creativas.
+      </p>
+
+      <p>
+        Me gusta aprender cosas nuevas, probar ideas y explicarlas de forma simple,
+        sin vueltas. Este proyecto nació para compartir lo que voy descubriendo
+        y armar una comunidad copada.
+      </p>
+
+      <p>
+        Gracias por estar acá 💙
+      </p>
+
+      <a class="back" href="Aqui-Valen-Bio.html">← Volver</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Especial para Mamá 💖</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #ffe5e5, #fff0f5);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #ffb6c1;
+      padding: 20px;
+      color: white;
+      font-size: 2em;
+      font-weight: bold;
+    }
+    section {
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      background-color: #fff0f5;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: pink;
+      top: 0;
+      animation: fall 3s linear infinite;
+    }
+    @keyframes fall {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(100vh);}
+    }
+    ul {
+      text-align: left;
+    }
+    input, textarea {
+      width: 90%;
+      padding: 5px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>✨ Página Especial para Mamá ✨</header>
+
+  <section>
+    <h2>🕒 Reloj en tiempo real</h2>
+    <p id="reloj">Cargando...</p>
+  </section>
+
+  <section>
+    <h2>💌 Frases Inspiradoras</h2>
+    <p id="frase">¡Eres increíble!</p>
+    <button onclick="cambiarFrase()">Nueva frase</button>
+  </section>
+
+  <section>
+    <h2>🎉 Botón mágico</h2>
+    <button onclick="crearConfetti()">Haz aparecer corazones</button>
+  </section>
+
+  <section>
+    <h2>📖 Diario online</h2>
+    <textarea id="diario" rows="4" placeholder="Escribe algo lindo para mamá..."></textarea>
+    <br>
+    <button onclick="guardarDiario()">Guardar</button>
+    <p id="diarioGuardado"></p>
+  </section>
+
+  <section>
+    <h2>📅 Agenda familiar</h2>
+    <input type="text" id="evento" placeholder="Nombre del evento">
+    <input type="date" id="fecha">
+    <button onclick="agregarEvento()">Agregar evento</button>
+    <ul id="listaEventos"></ul>
+  </section>
+
+  <section>
+    <h2>🍲 Recetas favoritas</h2>
+    <select id="tipoReceta" onchange="filtrarRecetas()">
+      <option value="todas">Todas</option>
+      <option value="desayuno">Desayuno</option>
+      <option value="almuerzo">Almuerzo</option>
+      <option value="cena">Cena</option>
+    </select>
+    <ul id="recetas">
+      <li data-tipo="desayuno">Panqueques de chocolate</li>
+      <li data-tipo="almuerzo">Ensalada fresca</li>
+      <li data-tipo="cena">Pasta con salsa de tomate</li>
+      <li data-tipo="desayuno">Huevos revueltos</li>
+      <li data-tipo="cena">Pollo al horno</li>
+    </ul>
+  </section>
+
+  <script>
+    // Reloj
+    function actualizarReloj() {
+      const ahora = new Date();
+      document.getElementById('reloj').innerText = ahora.toLocaleTimeString();
+    }
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
+
+    // Frases inspiradoras
+    const frases = [
+      "¡Eres increíble!",
+      "Mamá, te amamos mucho 💖",
+      "Cada día eres más especial ✨",
+      "Gracias por todo lo que haces 🌸",
+      "Tu sonrisa ilumina el mundo 🌟"
+    ];
+    function cambiarFrase() {
+      const frase = frases[Math.floor(Math.random() * frases.length)];
+      document.getElementById('frase').innerText = frase;
+    }
+
+    // Botón mágico
+    function crearConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
+        confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => { confetti.remove() }, 3000);
+      }
+    }
+
+    // Diario online
+    function guardarDiario() {
+      const texto = document.getElementById('diario').value;
+      if (texto.trim() === "") {
+        alert("Escribe algo antes de guardar.");
+        return;
+      }
+      document.getElementById('diarioGuardado').innerText = `Guardado: "${texto}"`;
+      document.getElementById('diario').value = "";
+    }
+
+    // Agenda familiar
+    function agregarEvento() {
+      const nombre = document.getElementById('evento').value;
+      const fecha = document.getElementById('fecha').value;
+      if (!nombre || !fecha) {
+        alert("Completa el nombre y la fecha del evento.");
+        return;
+      }
+      const li = document.createElement('li');
+      li.textContent = `${fecha}: ${nombre}`;
+      document.getElementById('listaEventos').appendChild(li);
+      document.getElementById('evento').value = "";
+      document.getElementById('fecha').value = "";
+    }
+
+    // Filtrar recetas
+    function filtrarRecetas() {
+      const tipo = document.getElementById('tipoReceta').value;
+      const recetas = document.querySelectorAll('#recetas li');
+      recetas.forEach(r => {
+        r.style.display = (tipo === "todas" || r.dataset.tipo === tipo) ? 'list-item' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>

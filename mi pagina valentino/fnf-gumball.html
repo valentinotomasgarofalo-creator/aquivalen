@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FNF Mini Game</title>
+  <style>
+    body { margin: 0; background: black; color: white; font-family: sans-serif; text-align: center; }
+    #game {
+      width: 400px; height: 600px; margin: 20px auto;
+      position: relative; background: #111;
+      border: 4px solid white;
+    }
+    .arrow {
+      width: 50px; height: 50px;
+      position: absolute;
+      background-size: cover;
+    }
+    .arrow.up    { background-image: url('https://i.imgur.com/WQYtRkz.png'); }
+    .arrow.down  { background-image: url('https://i.imgur.com/BttGNaS.png'); }
+    .arrow.left  { background-image: url('https://i.imgur.com/x1pTZ5I.png'); }
+    .arrow.right { background-image: url('https://i.imgur.com/vgfhL7X.png'); }
+
+    #score { position: absolute; top: 10px; left: 10px; color: white; }
+    #characters img {
+      height: 150px;
+      margin: 10px;
+    }
+    #controls {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎤 fortnite FNF</h1>
+  <div id="controls">
+    <button onclick="startLevel('level1')">Empezar Nivel 1</button>
+    <button onclick="startLevel('level2')">Nivel 2 (pronto)</button>
+  </div>
+
+  <div id="game">
+    <div id="score">Puntos: 0</div>
+    <div id="characters">
+      <img src="1.png" id="bf">
+      <img src="2.jpeg" id="enemy">
+    </div>
+  </div>
+
+  <audio id="music" src="https://cdn.pixabay.com/audio/2022/03/15/audio_48b7db8f25.mp3"></audio>
+
+  <script>
+    const game = document.getElementById("game");
+    const scoreDisplay = document.getElementById("score");
+    const music = document.getElementById("music");
+
+    let score = 0;
+    let gameRunning = false;
+
+    const arrowTypes = ["up", "down", "left", "right"];
+
+    function spawnArrow() {
+      const dir = arrowTypes[Math.floor(Math.random() * arrowTypes.length)];
+      const arrow = document.createElement("div");
+      arrow.className = "arrow " + dir;
+      arrow.style.left = (arrowTypes.indexOf(dir) * 100 + 25) + "px";
+      arrow.style.top = "0px";
+      arrow.dataset.direction = dir;
+      game.appendChild(arrow);
+    }
+
+    function updateArrows() {
+      const arrows = document.querySelectorAll(".arrow");
+      arrows.forEach(arrow => {
+        arrow.style.top = (parseInt(arrow.style.top) + 4) + "px";
+        if (parseInt(arrow.style.top) > 600) arrow.remove();
+      });
+    }
+
+    function startLevel(levelName) {
+      if (gameRunning) return;
+      gameRunning = true;
+      score = 0;
+      scoreDisplay.innerText = "Puntos: 0";
+      music.currentTime = 0;
+      music.play();
+
+      const spawn = setInterval(() => {
+        if (!gameRunning) return clearInterval(spawn);
+        spawnArrow();
+      }, 900);
+
+      const move = setInterval(() => {
+        if (!gameRunning) return clearInterval(move);
+        updateArrows();
+      }, 20);
+
+      // Nivel termina cuando la música termina
+      music.onended = () => {
+        gameRunning = false;
+        alert("¡Nivel terminado! Puntos: " + score);
+      };
+    }
+
+    document.addEventListener("keydown", e => {
+      if (!gameRunning) return;
+      const dir = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" }[e.key];
+      if (dir) {
+        const matching = document.querySelectorAll(".arrow." + dir);
+        for (let arrow of matching) {
+          const top = parseInt(arrow.style.top);
+          if (top > 500 && top < 580) {
+            arrow.remove();
+            score += 10;
+            scoreDisplay.innerText = "Puntos: " + score;
+            return;
+          }
+        }
+        score -= 5;
+        scoreDisplay.innerText = "Puntos: " + score;
+      }
+    });
+  </script>
+
+</body>
+</html>

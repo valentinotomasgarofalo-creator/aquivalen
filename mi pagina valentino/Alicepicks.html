@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>AlicePicks Banda</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.9);
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+nav a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: red;
+}
+
+/* SECCIONES */
+section {
+  padding: 100px 40px;
+}
+
+.hero {
+  background: url("fondo-banda.jpg") center/cover no-repeat;
+  text-align: center;
+  padding: 150px 20px;
+}
+
+.hero h1 {
+  font-size: 60px;
+}
+
+.hero p {
+  font-size: 20px;
+}
+
+/* EVENTOS STICKY */
+.eventos-sticky {
+  position: sticky;
+  top: 70px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.eventos-sticky img {
+  max-width: 90%;
+  border-radius: 15px;
+  box-shadow: 0 0 20px red;
+}
+
+/* MIEMBROS */
+.miembros {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.miembro {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.miembro img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* ALBUM */
+.album {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.album img {
+  width: 250px;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio">Home</a>
+  <a href="#historia">Historia</a>
+  <a href="#musica">Música</a>
+  <a href="#eventos">Eventos</a>
+  <a href="#miembros">Miembros</a>
+</nav>
+
+<!-- INICIO -->
+<section id="inicio" class="hero">
+  <h1>AlicePicks</h1>
+  <p>Rap Rock · Alternativo</p>
+</section>
+
+<!-- HISTORIA -->
+<section id="historia">
+  <h2>📖 Historia</h2>
+  <p>
+    Todo comenzó entre dos chicos que amaban la música y pensaron:
+    “¿y si hacemos una banda?”  
+    Así nació <b>AlicePicks</b>.
+  </p>
+</section>
+
+<!-- MUSICA -->
+<section id="musica">
+  <h2>🎵 Música</h2>
+
+  <div class="album">
+    <img src="album-from-nothing.jpg" alt="From Nothing">
+    <div>
+      <h3>From Nothing</h3>
+      <p>Primer álbum</p>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section id="eventos">
+  <h2>📅 Eventos</h2>
+
+  <div class="eventos-sticky">
+    <img src alt="Por ahora no hay eventos">
+  </div>
+
+  <p style="text-align:center;">
+    Cuando haya fechas nuevas, las vas a ver acá 🔥
+  </p>
+</section>
+
+<!-- MIEMBROS -->
+<section id="miembros">
+  <h2>👥 Miembros de la banda</h2>
+
+  <div class="miembros">
+    <div class="miembro">
+      <p>Valen<br>Cantante y rapero</p>
+    </div>
+
+    <div class="miembro">
+      <p>Leo<br>Guitarra criolla</p>
+    </div>
+
+    <div class="miembro">
+      <p>Mauricio<br>Baterista</p>
+    </div>
+
+    <div class="miembro">
+      <p>Alejandro<br>Guitarra eléctrica</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
